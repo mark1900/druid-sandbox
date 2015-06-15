@@ -1,11 +1,12 @@
 
 Below is the documentation for [kafka-storm-tranquility-druid-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-druid-topology-test).
 
+This project utilizes a Storm "TridentTopology" as a means to transactionally consume messages from a Kafka Spout (Via the TransactionalTridentKafkaSpout class) and after processing, output to the results to Druid (via Tranquility's TridentBeamStateFactory and TridentBeamStateUpdater classes).
 
 The kafka-storm-tranquility-druid-topology-test project uses the following technologies:
 
 * CentOs 7
-* PostgreSQL
+* PostgreSQL 9.2.x
 * ZooKeeper 3.4.6
 * Kafka 2.10-0.8.2.1
 * Apache Storm 0.9.4
