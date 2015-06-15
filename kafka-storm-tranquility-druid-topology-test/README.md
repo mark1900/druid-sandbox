@@ -211,9 +211,7 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 -
  <pre><code>
 
  cd apache-storm-0.9.4
-
  ./bin/storm kill "kafka-storm-tranquility-druid-topology-test"
-
  ./bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
 
  </code></pre>
