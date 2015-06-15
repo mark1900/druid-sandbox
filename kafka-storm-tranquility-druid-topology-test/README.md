@@ -1,7 +1,7 @@
 
 Below is the documentation for [kafka-storm-tranquility-druid-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-druid-topology-test).
 
-This project utilizes a Storm "TridentTopology" as a means to transactionally consume messages from a Kafka Spout (Via the TransactionalTridentKafkaSpout class) and after processing, output to the results to Druid (via Tranquility's TridentBeamStateFactory and TridentBeamStateUpdater classes).
+This project utilizes a Storm "TridentTopology" as a means to transactionally consume messages from a Kafka Spout (Via the TransactionalTridentKafkaSpout class) and after processing, output to the results to Druid (via Tranquility's TridentBeamStateFactory and TridentBeamStateUpdater classes). For more details, see [StormTranquilityTopologyTest.java](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-druid-topology-test/src/main/java/test/storm/StormTranquilityTopologyTest.java).
 
 The kafka-storm-tranquility-druid-topology-test project uses the following technologies:
 
