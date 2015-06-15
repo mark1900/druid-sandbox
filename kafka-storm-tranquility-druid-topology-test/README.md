@@ -197,7 +197,7 @@ java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_commo
 # Application Configuration
 
 
-Update Configuration values in the source file:
+Update Configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
 
 * kafka-storm-tranquility-druid-topology-test/src/main/java/test/storm/AppConfiguration.java
 
