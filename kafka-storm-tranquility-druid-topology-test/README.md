@@ -1,5 +1,21 @@
 
-Documentation for [kafka-storm-tranquility-druid-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-druid-topology-test)
+Below is the documentation for [kafka-storm-tranquility-druid-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-druid-topology-test).
+
+
+The kafka-storm-tranquility-druid-topology-test project uses the following technologies:
+
+* CentOs 7
+* PostgreSQL
+* ZooKeeper 3.4.6
+* Kafka 2.10-0.8.2.1
+* Apache Storm 0.9.5
+* Druid 0.7.3
+
+
+This Storm Topology test assumes that all required services are installed onto the same server.
+
+* Remember to replace the "&lt;sever-ip-address&gt;" placeholder.
+* Remember to check your firewall settings.
 
 
 # Server Configuration
@@ -49,11 +65,11 @@ cp zookeeper-3.4.6/conf/zoo_sample.cfg zookeeper-3.4.6/conf/zoo.cfg
 vim apache-storm-0.9.4/conf/storm.yaml
 
 storm.zookeeper.servers:
-    - "&lt;server1&gt;"
+    - "&lt;sever-ip-address&gt;"
 
 storm.local.dir: "/tmp/storm/localStorage"
 
-nimbus.host: "&lt;server1&gt;"
+nimbus.host: "&lt;sever-ip-address&gt;"
 
 ui.port: 28080
 
