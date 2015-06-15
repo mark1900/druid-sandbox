@@ -61,30 +61,30 @@ ui.port: 28080
 
 vim druid-0.7.1.1/config/_common/common.runtime.properties
 
-\# Extensions
+ # Extensions
 druid.extensions.coordinates=["io.druid.extensions:postgresql-metadata-storage","io.druid.extensions:druid-kafka-eight"]
 
-\# Zookeeper
+ # Zookeeper
 druid.zk.service.host=localhost
 
-\# Metadata Storage
+ # Metadata Storage
 druid.metadata.storage.type=postgresql
 druid.metadata.storage.connector.connectURI=jdbc\:postgresql\://localhost\:5432/druid
 druid.metadata.storage.connector.user=druid
 druid.metadata.storage.connector.password=diurd
 
-\# Deep storage
+ # Deep storage
 druid.storage.type=local
 druid.storage.storageDirectory=/tmp/druid/localStorage
 
-\# Query Cache
+ # Query Cache
 druid.cache.type=local
 druid.cache.sizeInBytes=10000000
 
-\# Indexing service discovery
+ # Indexing service discovery
 druid.selectors.indexing.serviceName=overlord
 
-\# Metrics logging
+ # Metrics logging
 druid.emitter=noop
 
 </code></pre>
@@ -102,7 +102,7 @@ vim ~/.curlrc
 
 <pre><code>
 
-\# http://www.postgresql.org/download/linux/redhat/
+ # http://www.postgresql.org/download/linux/redhat/
 yum install postgresql-server
 postgresql-setup initdb
 
@@ -184,9 +184,9 @@ java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_commo
 
 java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/broker:lib/* io.druid.cli.Main server broker
 
-\# Realtime node instances.
+ # Realtime node instances.
 
-\# java -Xmx512m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Ddruid.realtime.specFile=&lt;path-to-runtime-spec-file&gt; -classpath config/_common:config/realtime:lib/* io.druid.cli.Main server realtime
+ # java -Xmx512m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Ddruid.realtime.specFile=&lt;path-to-runtime-spec-file&gt; -classpath config/_common:config/realtime:lib/* io.druid.cli.Main server realtime
 
 </code></pre>
 
