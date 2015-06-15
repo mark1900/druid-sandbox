@@ -104,9 +104,12 @@ vim ~/.curlrc
 
 ## PostgreSQL For Druid
 
+### CentOS 7
+
 <pre><code>
 
  # http://www.postgresql.org/download/linux/redhat/
+
 yum install postgresql-server
 postgresql-setup initdb
 
