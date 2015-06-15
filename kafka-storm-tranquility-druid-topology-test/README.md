@@ -8,7 +8,7 @@ The kafka-storm-tranquility-druid-topology-test project uses the following techn
 * PostgreSQL
 * ZooKeeper 3.4.6
 * Kafka 2.10-0.8.2.1
-* Apache Storm 0.9.5
+* Apache Storm 0.9.4
 * Druid 0.7.3
 
 
@@ -21,6 +21,7 @@ This Storm Topology test assumes that all required services are installed onto t
 # Server Configuration
 
 ## Download
+
 <pre><code>
 
 cd ~/
@@ -37,14 +38,13 @@ wget http://www.us.apache.org/dist/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
 
 tar -xzf kafka_2.10-0.8.2.1.tgz
 
-wget http://www.us.apache.org/dist/storm/apache-storm-0.9.5/apache-storm-0.9.5.tar.gz
+wget http://www.us.apache.org/dist/storm/apache-storm-0.9.4/apache-storm-0.9.4.tar.gz
 
-tar -xzf apache-storm-0.9.5.tar.gz
+tar -xzf apache-storm-0.9.4.tar.gz
 
 wget http://static.druid.io/artifacts/releases/druid-0.7.3-bin.tar.gz
 
 tar -xzf druid-0.7.3-bin.tar.gz
-
 
 </code></pre>
 
@@ -79,7 +79,7 @@ ui.port: 28080
 
 <pre><code>
 
-vim druid-0.7.1.1/config/_common/common.runtime.properties
+vim druid-0.7.3/config/_common/common.runtime.properties
 
  # Extensions
 druid.extensions.coordinates=["io.druid.extensions:postgresql-metadata-storage","io.druid.extensions:druid-kafka-eight"]
@@ -215,7 +215,6 @@ java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_commo
 
 # Application Configuration
 
-
 Update Configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
 
 * kafka-storm-tranquility-druid-topology-test/src/main/java/test/storm/AppConfiguration.java
@@ -231,13 +230,13 @@ bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 -
 
 # Manual Storm Topology Submission
 
- <pre><code>
+<pre><code>
 
- cd apache-storm-0.9.4
- ./bin/storm kill "kafka-storm-tranquility-druid-topology-test"
- ./bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
+cd apache-storm-0.9.4
+./bin/storm kill "kafka-storm-tranquility-druid-topology-test"
+./bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
 
- </code></pre>
+</code></pre>
 
 # Kafka Test Message Creation
 
