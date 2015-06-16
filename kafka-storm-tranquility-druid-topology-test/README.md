@@ -13,19 +13,16 @@ The kafka-storm-tranquility-druid-topology-test project uses the following techn
 * Tranquility 2.10-0.4.2
 * Druid 0.7.3
 
-
 This Storm Topology test assumes that all required services are installed onto the same server.
 
 * Remember to replace the "&lt;sever-ip-address&gt;" placeholder.
 * Remember to check your firewall settings.
-
 
 # Server Configuration
 
 ## Download
 
 <pre><code>
-
 cd ~/
 
 mkdir kafka-storm-tranquility-druid-test
@@ -47,15 +44,12 @@ tar -xzf apache-storm-0.9.4.tar.gz
 wget http://static.druid.io/artifacts/releases/druid-0.7.3-bin.tar.gz
 
 tar -xzf druid-0.7.3-bin.tar.gz
-
 </code></pre>
 
 ## ZooKeeper Configuration
 
 <pre><code>
-
 cp zookeeper-3.4.6/conf/zoo_sample.cfg zookeeper-3.4.6/conf/zoo.cfg
-
 </code></pre>
 
 ## Storm Configuration
@@ -63,7 +57,6 @@ cp zookeeper-3.4.6/conf/zoo_sample.cfg zookeeper-3.4.6/conf/zoo.cfg
 ** Default Configuration: https://github.com/apache/storm/blob/master/conf/defaults.yaml
 
 <pre><code>
-
 vim apache-storm-0.9.4/conf/storm.yaml
 
 storm.zookeeper.servers:
@@ -74,13 +67,11 @@ storm.local.dir: "/tmp/storm/localStorage"
 nimbus.host: "&lt;sever-ip-address&gt;"
 
 ui.port: 28080
-
 </code></pre>
 
 ## Druid Configuration
 
 <pre><code>
-
 vim druid-0.7.3/config/_common/common.runtime.properties
 
  # Extensions
@@ -108,16 +99,13 @@ druid.selectors.indexing.serviceName=overlord
 
  # Metrics logging
 druid.emitter=noop
-
 </code></pre>
 
 ## Curl Configuration For Druid Queries
 
 <pre><code>
-
 vim ~/.curlrc
 -w "\n"
-
 </code></pre>
 
 ## PostgreSQL Configuration For Druid
@@ -125,7 +113,6 @@ vim ~/.curlrc
 ### CentOS 7
 
 <pre><code>
-
  # http://www.postgresql.org/download/linux/redhat/
 
 yum install postgresql-server
@@ -152,7 +139,6 @@ psql
 CREATE USER druid WITH PASSWORD 'diurd';
 CREATE DATABASE druid ENCODING 'UTF8';
 GRANT ALL PRIVILEGES ON DATABASE druid to druid;
-
 </code></pre>
 
 # Running Server Applications
@@ -160,31 +146,26 @@ GRANT ALL PRIVILEGES ON DATABASE druid to druid;
 ## Running ZooKeeper
 
 <pre><code>
-
 cd zookeeper-3.4.6
 
 ./bin/zkServer.sh start
 
 ./bin/zkServer.sh stop
-
 </code></pre>
 
 ## Running Kafka
 
 <pre><code>
-
 cd kafka_2.10-0.8.2.1
 
 ./bin/kafka-server-start.sh config/server.properties
 
 ./bin/kafka-server-stop.sh
-
 </code></pre>
 
 ## Running Storm
 
 <pre><code>
-
 cd apache-storm-0.9.4
 
 ./bin/storm nimbus
@@ -192,13 +173,11 @@ cd apache-storm-0.9.4
 ./bin/storm supervisor
 
 ./bin/storm ui
-
 </code></pre>
 
 ## Running Druid
 
 <pre><code>
-
 cd druid-0.7.3
 
 java -Xmx2g -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/overlord:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server overlord
@@ -212,7 +191,6 @@ java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_commo
  # Realtime node instances.
 
  # java -Xmx512m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Ddruid.realtime.specFile=&lt;path-to-runtime-spec-file&gt; -classpath config/_common:config/realtime:lib/* io.druid.cli.Main server realtime
-
 </code></pre>
 
 # Application Configuration
@@ -221,23 +199,18 @@ Update Configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
 
 * kafka-storm-tranquility-druid-topology-test/src/main/java/test/storm/AppConfiguration.java
 
-
 # Manual Kafka Topic Creation
 
 <pre><code>
-
 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-tranquility-druid-topology-test_v1
-
 </code></pre>
 
 # Manual Storm Topology Submission
 
 <pre><code>
-
 cd apache-storm-0.9.4
 ./bin/storm kill "kafka-storm-tranquility-druid-topology-test"
 ./bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
-
 </code></pre>
 
 # Manual Kafka Test Message Creation
@@ -246,21 +219,17 @@ Execute Java class file:
 
 * kafka-storm-tranquility-druid-topology-test/src/test/java/test/kafka/KafkaMessageProducer.java
 
-
 # Monitoring
 
 * apache-storm-0.9.4/logs/worker-*.log
 * http://&lt;druid-coordinator-instance-hostname&gt;:8090/console.html
 * http://&lt;storm-ui-instance-hostname&gt;:28080/index.html
 
-
 # Druid Sample Queries
 
 <pre><code>
-
 curl -X POST "http://localhost:8082/druid/v2/?pretty" -H 'Content-type: application/json' -d '{"queryType":"timeBoundary","dataSource":"kafka-storm-tranquility-druid-topology-test-datasource"}'
 
 curl -X POST "http://localhost:8082/druid/v2/?pretty" -H 'Content-type: application/json' -d '{"queryType": "groupBy","dataSource": "kafka-storm-tranquility-druid-topology-test-datasource","granularity": "all","dimensions": [ "type" ],"aggregations": [{ "type": "count", "name": "rows" }],"intervals": ["2002-02-01T00:00/2020-01-01T00"]}'
-
 </code></pre>
 
