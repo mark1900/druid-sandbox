@@ -141,7 +141,13 @@ CREATE DATABASE druid ENCODING 'UTF8';
 GRANT ALL PRIVILEGES ON DATABASE druid to druid;
 </code></pre>
 
-# Running Server Applications
+# Running the Server Applications
+
+For convenience I have created the following scripts:
+
+* [start-all.sh](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-druid-topology-test/misc/bash-scripts/start-all.sh)
+* [stop-all.sh](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-druid-topology-test/misc/bash-scripts/stop-all.sh)
+* [x-purge-state.sh](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-druid-topology-test/misc/bash-scripts/x-purge-state.sh)
 
 ## Running ZooKeeper
 
@@ -193,43 +199,86 @@ java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_commo
  # java -Xmx512m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Ddruid.realtime.specFile=&lt;path-to-runtime-spec-file&gt; -classpath config/_common:config/realtime:lib/* io.druid.cli.Main server realtime
 </code></pre>
 
-# Application Configuration
 
-Update Configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
+# Monitoring the Server Applications
+
+* apache-storm-0.9.4/logs/worker-*.log
+* http://&lt;druid-overlord-instance-hostname&gt;:8090/console.html
+* http://&lt;storm-ui-instance-hostname&gt;:28080/index.html
+
+# Building and Deploying the Storm Topology
+
+## Manual Kafka Topic Creation
+
+<pre><code>
+./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-tranquility-druid-topology-test_v1
+</code></pre>
+
+## Building the Storm Topology
+
+Update the Application configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
 
 * kafka-storm-tranquility-druid-topology-test/src/main/java/test/storm/AppConfiguration.java
 
-# Manual Kafka Topic Creation
+Build the Storm Topology
+
+* Build with maven ("mvn clean package") to create the Storm Topology jar file: "kafka-storm-tranquility-druid-topology-test.jar".
+
+
+## Manual Storm Topology Submission
 
 <pre><code>
-bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-tranquility-druid-topology-test_v1
+./apache-storm-0.9.4/bin/storm kill "kafka-storm-tranquility-druid-topology-test"
+
+./apache-storm-0.9.4/bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
 </code></pre>
 
-# Manual Storm Topology Submission
+# Executing the Test
 
-<pre><code>
-cd apache-storm-0.9.4
-./bin/storm kill "kafka-storm-tranquility-druid-topology-test"
-./bin/storm jar kafka-storm-tranquility-druid-topology-test.jar test.storm.StormTranquilityTopologyTest
-</code></pre>
-
-# Manual Kafka Test Message Creation
+## Manual Kafka Test Message Creation
 
 Execute Java class file:
 
 * kafka-storm-tranquility-druid-topology-test/src/test/java/test/kafka/KafkaMessageProducer.java
 
-# Monitoring
 
-* apache-storm-0.9.4/logs/worker-*.log
-* http://&lt;druid-coordinator-instance-hostname&gt;:8090/console.html
-* http://&lt;storm-ui-instance-hostname&gt;:28080/index.html
-
-# Druid Sample Queries
+## Druid Sample Queries
 
 <pre><code>
 curl -X POST "http://localhost:8082/druid/v2/?pretty" -H 'Content-type: application/json' -d '{"queryType":"timeBoundary","dataSource":"kafka-storm-tranquility-druid-topology-test-datasource"}'
 
+[ {
+  "timestamp" : "2015-06-15T18:17:13.000Z",
+  "result" : {
+    "minTime" : "2015-06-15T18:17:13.000Z",
+    "maxTime" : "2015-06-15T18:18:43.000Z"
+  }
+} ]
+
+
 curl -X POST "http://localhost:8082/druid/v2/?pretty" -H 'Content-type: application/json' -d '{"queryType": "groupBy","dataSource": "kafka-storm-tranquility-druid-topology-test-datasource","granularity": "all","dimensions": [ "type" ],"aggregations": [{ "type": "count", "name": "rows" }],"intervals": ["2002-02-01T00:00/2020-01-01T00"]}'
+
+[ {
+  "version" : "v1",
+  "timestamp" : "2002-02-01T00:00:00.000Z",
+  "event" : {
+    "type" : "APPLICATION",
+    "rows" : 2
+  }
+}, {
+  "version" : "v1",
+  "timestamp" : "2002-02-01T00:00:00.000Z",
+  "event" : {
+    "type" : "SECURITY",
+    "rows" : 2
+  }
+}, {
+  "version" : "v1",
+  "timestamp" : "2002-02-01T00:00:00.000Z",
+  "event" : {
+    "type" : "SYSTEM",
+    "rows" : 4
+  }
+} ]
 </code></pre>
 
