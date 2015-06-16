@@ -7,7 +7,7 @@ ps -ef | grep java | grep -v "grep" | grep -v " org.apache.zookeeper.server.quor
 sleep 5
 
 cd "${DIR}/kafka_2.10-0.8.2.1"
-./bin/kafka-server-stop.sh config/server.properties &
+./bin/kafka-server-stop.sh
 sleep 5
 
 cd "${DIR}/zookeeper-3.4.6"
