@@ -10,6 +10,7 @@ The kafka-storm-tranquility-druid-topology-test project uses the following techn
 * ZooKeeper 3.4.6
 * Kafka 2.10-0.8.2.1
 * Apache Storm 0.9.4
+* Tranquility 2.10-0.4.2
 * Druid 0.7.3
 
 
@@ -49,7 +50,7 @@ tar -xzf druid-0.7.3-bin.tar.gz
 
 </code></pre>
 
-## ZooKeeper
+## ZooKeeper Configuration
 
 <pre><code>
 
@@ -57,7 +58,7 @@ cp zookeeper-3.4.6/conf/zoo_sample.cfg zookeeper-3.4.6/conf/zoo.cfg
 
 </code></pre>
 
-## Storm
+## Storm Configuration
 
 ** Default Configuration: https://github.com/apache/storm/blob/master/conf/defaults.yaml
 
@@ -76,7 +77,7 @@ ui.port: 28080
 
 </code></pre>
 
-## Druid
+## Druid Configuration
 
 <pre><code>
 
@@ -119,7 +120,7 @@ vim ~/.curlrc
 
 </code></pre>
 
-## PostgreSQL For Druid
+## PostgreSQL Configuration For Druid
 
 ### CentOS 7
 
@@ -156,7 +157,7 @@ GRANT ALL PRIVILEGES ON DATABASE druid to druid;
 
 # Running Server Applications
 
-## ZooKeeper
+## Running ZooKeeper
 
 <pre><code>
 
@@ -168,7 +169,7 @@ cd zookeeper-3.4.6
 
 </code></pre>
 
-## Kafka
+## Running Kafka
 
 <pre><code>
 
@@ -180,7 +181,7 @@ cd kafka_2.10-0.8.2.1
 
 </code></pre>
 
-## Storm
+## Running Storm
 
 <pre><code>
 
@@ -194,7 +195,7 @@ cd apache-storm-0.9.4
 
 </code></pre>
 
-## Druid
+## Running Druid
 
 <pre><code>
 
@@ -239,7 +240,7 @@ cd apache-storm-0.9.4
 
 </code></pre>
 
-# Kafka Test Message Creation
+# Manual Kafka Test Message Creation
 
 Execute Java class file:
 
