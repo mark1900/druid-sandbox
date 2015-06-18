@@ -86,7 +86,7 @@ public class MyTranquilityBeamFactory implements BeamFactory<Map<String, Object>
             .location( new DruidLocation( new DruidEnvironment( "overlord", "druid:firehose:%s" ), dataSource ) )
             .timestampSpec( new TimestampSpec( "timestamp", "iso" ) )  // Default DruidBeams DefaultTimestampSpec value
             .rollup( DruidRollup.create( DruidDimensions.specific( dimensions ), aggregators, QueryGranularity.NONE ) )
-            .tuning( ClusteredBeamTuning.create( Granularity.HOUR, new Period( "PT2M" ), new Period( "PT0M" ), 1, 1 ) )
+            .tuning( ClusteredBeamTuning.create( Granularity.HOUR, new Period( "PT2M" ), new Period( "PT10M" ), 1, 1 ) )
             .buildBeam();
 
     }
