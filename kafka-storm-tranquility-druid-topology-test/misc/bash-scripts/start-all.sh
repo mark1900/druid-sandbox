@@ -24,7 +24,7 @@ sleep 2
 sleep 2
 
 cd "${DIR}/druid-0.7.3"
-java -Xmx2g -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/overlord:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server overlord &
+java -Xmx1g -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/overlord:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server overlord &
 sleep 5
 java -Xms64m -Xmx64m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/middlemanager:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server middleManager &
 sleep 2
