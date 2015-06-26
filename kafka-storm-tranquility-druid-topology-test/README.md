@@ -5,7 +5,7 @@ This project utilizes a Storm "TridentTopology" as a means to transactionally co
 
 The kafka-storm-tranquility-druid-topology-test project uses the following technologies:
 
-* CentOs 7
+* CentOS 7
 * PostgreSQL 9.2.x
 * ZooKeeper 3.4.6
 * Kafka 2.10-0.8.2.1
@@ -30,19 +30,13 @@ mkdir kafka-storm-tranquility-druid-test
 cd kafka-storm-tranquility-druid-test
 
 wget http://www.us.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
-
-tar -xzf zookeeper-3.4.6.tar.gz
-
 wget http://www.us.apache.org/dist/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
-
-tar -xzf kafka_2.10-0.8.2.1.tgz
-
 wget http://www.us.apache.org/dist/storm/apache-storm-0.9.4/apache-storm-0.9.4.tar.gz
-
-tar -xzf apache-storm-0.9.4.tar.gz
-
 wget http://static.druid.io/artifacts/releases/druid-0.7.3-bin.tar.gz
 
+tar -xzf zookeeper-3.4.6.tar.gz
+tar -xzf kafka_2.10-0.8.2.1.tgz
+tar -xzf apache-storm-0.9.4.tar.gz
 tar -xzf druid-0.7.3-bin.tar.gz
 </code></pre>
 
