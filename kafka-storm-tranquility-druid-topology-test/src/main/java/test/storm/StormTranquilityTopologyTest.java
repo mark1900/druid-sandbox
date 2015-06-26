@@ -1,6 +1,5 @@
 package test.storm;
 
-import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -52,18 +51,24 @@ public final class StormTranquilityTopologyTest
         TridentTopology topology = new TridentTopology();
         Stream kafkaStream = topology.newStream( AppConfiguration.KAFKA_SPOUT_ID, buildTransactionalKafkaSpout() );
 
-        List<String> druidColumns = MyDruidColumns.getNames();
+        Stream processingStream = kafkaStream
+            .each(
+                new Fields( StringScheme.STRING_SCHEME_KEY ),
+                new MyNotificationDeserializerFunction(),
+                new Fields( "notification" ) )
+            .each(
+                new Fields( "notification" ),
+                new MyNotificationToMapFunction(),
+                new Fields( "data" ) );
 
-        kafkaStream
-            .each( new Fields( StringScheme.STRING_SCHEME_KEY ), new MyJsonDeserializer(),
-                          new Fields( "notification" ) )
-            .each( new Fields( "notification" ), new MyDruidDataConverter(),
-                          new Fields( druidColumns ) )
-            .partitionPersist(
-                          new TridentBeamStateFactory<>( new MyTranquilityBeamFactory() ),
-                          new Fields( druidColumns ),
-                          new TridentBeamStateUpdater<Map<String, Object>>()
-                      );
+
+        Fields inputFields = new Fields( "data" );
+
+        processingStream.partitionPersist(
+                new TridentBeamStateFactory<>( new MyTranquilityBeamFactory() ),
+                inputFields,
+                new TridentBeamStateUpdater<Map<String, Object>>()
+             );
 
         return topology.build();
 
