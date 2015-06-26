@@ -17,12 +17,15 @@ public final class AppConfiguration
     public static final String KAFKA_SERVERS_CONFIG = System.getProperty(
         "test.storm.topology.kafka.servers.config", "localhost:9092" );
 
-    public static final String KAFKA_SERVERS_CONFIG_ACKS = System.getProperty(
-        "test.storm.topology.kafka.servers.config.acks", "all" );
-    public static final Integer KAFKA_SERVERS_CONFIG_RETRIES = Integer.getInteger(
-        "test.storm.topology.kafka.servers.config.retries", 100);
-    public static final Integer KAFKA_SERVERS_CONFIG_RETRY_BACKOFF = Integer.getInteger(
-        "test.storm.topology.kafka.servers.config.retry.backoff", 1000 );
+    public static final String KAFKA_SERVERS_CONFIG_PRODUCER_ACKS = System.getProperty(
+        "test.storm.topology.kafka.servers.config.producer.acks", "all" );
+    public static final String KAFKA_SERVERS_CONFIG_PRODUCER_ORIGINAL_ACKS= System.getProperty(
+        "test.storm.topology.kafka.servers.config.producer_original.acks", "1" );
+
+    public static final Integer KAFKA_SERVERS_CONFIG_PRODUCER_RETRIES = Integer.getInteger(
+        "test.storm.topology.kafka.servers.config.producer.retries", 100);
+    public static final Integer KAFKA_SERVERS_CONFIG_PRODUCER_RETRY_BACKOFF = Integer.getInteger(
+        "test.storm.topology.kafka.servers.config.producer.retry.backoff", 1000 );
 
     public static final String KAFKA_SERVERS_TOPIC_PHASE1 = System.getProperty(
         "test.storm.topology.kafka.servers.config.topic.phase1", TOPOLOGY_NAME + "_v1" + "_phase1" );

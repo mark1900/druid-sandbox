@@ -54,9 +54,9 @@ public class KafkaValueSenderSvcImpl implements KafkaValueSenderSvc
         producerProperties.put( ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName() );
         producerProperties.put( ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName() );
 
-        producerProperties.put( ProducerConfig.ACKS_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_ACKS );
-        producerProperties.put( ProducerConfig.RETRIES_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_RETRIES );
-        producerProperties.put( ProducerConfig.RETRY_BACKOFF_MS_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_RETRY_BACKOFF );
+        producerProperties.put( ProducerConfig.ACKS_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_PRODUCER_ACKS );
+        producerProperties.put( ProducerConfig.RETRIES_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_PRODUCER_RETRIES );
+        producerProperties.put( ProducerConfig.RETRY_BACKOFF_MS_CONFIG, AppConfiguration.KAFKA_SERVERS_CONFIG_PRODUCER_RETRY_BACKOFF );
 
         // producerProperties.put( ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class.getName() );
         // producerProperties.put( ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, ByteArraySerializer.class.getName() );

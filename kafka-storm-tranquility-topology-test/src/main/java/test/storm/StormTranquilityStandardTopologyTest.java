@@ -66,7 +66,7 @@ public final class StormTranquilityStandardTopologyTest
         // Set producer properties.
         Properties props = new Properties();
         props.put( "metadata.broker.list", AppConfiguration.KAFKA_SERVERS_CONFIG );
-        props.put( "request.required.acks", AppConfiguration.KAFKA_SERVERS_CONFIG_ACKS );
+        props.put( "request.required.acks", AppConfiguration.KAFKA_SERVERS_CONFIG_PRODUCER_ORIGINAL_ACKS );
         props.put( "producer.type", "sync" );
         props.put( "serializer.class", "kafka.serializer.StringEncoder" );
         config.put( TridentKafkaState.KAFKA_BROKER_PROPERTIES, props );
