@@ -1,11 +1,11 @@
 
-Below is the documentation for [kafka-storm-tranquility-druid-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-druid-topology-test).
+Below is the documentation for [kafka-storm-tranquility-topology-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-storm-tranquility-topology-test).
 
 This project utilizes a Storm "TridentTopology" as a means to transactionally consume messages from a Kafka Spout (Via the TransactionalTridentKafkaSpout class) and after processing, output to the results back to Kafka (via Tranquility's TridentBeamStateFactory and TridentBeamStateUpdater classes).  The topologies are described here:
 * [StormTranquilityStandardTopologyTest.java](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-topology-test/src/main/java/test/storm/StormTranquilityStandardTopologyTest.java).
 * [StormTranquilityImprovedTopologyTest.java](https://github.com/mark1900/druid-sandbox/blob/master/kafka-storm-tranquility-topology-test/src/main/java/test/storm/StormTranquilityImprovedTopologyTest.java).
 
-The kafka-storm-tranquility-druid-topology-test project uses the following technologies:
+The kafka-storm-tranquility-topology-test project uses the following technologies:
 
 * CentOS 7
 * ZooKeeper 3.4.6
@@ -32,12 +32,10 @@ cd kafka-storm-tranquility-test
 wget http://www.us.apache.org/dist/zookeeper/zookeeper-3.4.6/zookeeper-3.4.6.tar.gz
 wget http://www.us.apache.org/dist/kafka/0.8.2.1/kafka_2.10-0.8.2.1.tgz
 wget http://www.us.apache.org/dist/storm/apache-storm-0.9.4/apache-storm-0.9.4.tar.gz
-wget http://static.druid.io/artifacts/releases/druid-0.7.3-bin.tar.gz
 
 tar -xzf zookeeper-3.4.6.tar.gz
 tar -xzf kafka_2.10-0.8.2.1.tgz
 tar -xzf apache-storm-0.9.4.tar.gz
-tar -xzf druid-0.7.3-bin.tar.gz
 </code></pre>
 
 ## ZooKeeper Configuration
@@ -103,25 +101,6 @@ cd apache-storm-0.9.4
 
 ./bin/storm ui
 </code></pre>
-
-## Running Druid
-
-<pre><code>
-cd druid-0.7.3
-
-java -Xmx1g -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/overlord:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server overlord
-
-java -Xms64m -Xmx64m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/middlemanager:lib/*:${HADOOP_CONFIG_PATH} io.druid.cli.Main server middleManager
-
-java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/coordinator:lib/* io.druid.cli.Main server coordinator
-
-java -Xmx256m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -classpath config/_common:config/broker:lib/* io.druid.cli.Main server broker
-
- # Realtime node instances.
-
- # java -Xmx512m -Duser.timezone=UTC -Dfile.encoding=UTF-8 -Ddruid.realtime.specFile=&lt;path-to-runtime-spec-file&gt; -classpath config/_common:config/realtime:lib/* io.druid.cli.Main server realtime
-</code></pre>
-
 
 # Monitoring the Server Applications
 
