@@ -16,13 +16,18 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 
 @SuppressWarnings( "nls" )
-public class MyJsonDeserializer extends BaseFunction
+public class MyNotificationDeserializerFunction extends BaseFunction
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( MyDruidDataConverter.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( MyNotificationDeserializerFunction.class );
 
+    public static final int INPUT_FIELD_INDEX = 0;
+    public static final int INPUT_FIELD_COUNT = 1;
+
+    public static final int OUTPUT_FIELD_INDEX = 0;
+    public static final int OUTPUT_FIELD_COUNT = 1;
 
     /**
      * {@inheritDoc}
@@ -30,16 +35,22 @@ public class MyJsonDeserializer extends BaseFunction
     @Override
     public void execute( TridentTuple tuple, TridentCollector collector )
     {
-        LOGGER.info( "Deserializing Message..." );
+        if ( LOGGER.isDebugEnabled() )
+        {
+            LOGGER.debug( "Deserializing..." );
+        }
 
         try
         {
-            String message = tuple.getString( 0 );
+            String message = tuple.getString( INPUT_FIELD_INDEX );
 
             MyNotification notification =
                 JsonUtils.getObjectMapper().readValue( message, MyNotification.class );
 
-            LOGGER.info( "Deserialized Message..." + String.valueOf( notification ) );
+            if ( LOGGER.isInfoEnabled() )
+            {
+                LOGGER.info( "Deserialized:  " + String.valueOf( notification ) );
+            }
 
             collector.emit( new Values( notification ) );
 

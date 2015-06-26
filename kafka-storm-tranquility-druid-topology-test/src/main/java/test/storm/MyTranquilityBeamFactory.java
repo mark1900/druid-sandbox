@@ -43,7 +43,7 @@ public class MyTranquilityBeamFactory implements BeamFactory<Map<String, Object>
 
     private static final long serialVersionUID = 1L;
 
-//    private static final Logger LOGGER = LoggerFactory.getLogger( MyDruidDataConverter.class );
+//    private static final Logger LOGGER = LoggerFactory.getLogger( MyTranquilityBeamFactory.class );
 
     @SuppressWarnings( { "resource", "unused" } )
     @Override

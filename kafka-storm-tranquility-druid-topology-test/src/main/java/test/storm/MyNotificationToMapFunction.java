@@ -19,12 +19,18 @@ import test.util.DruidDateUtil;
 import backtype.storm.tuple.Values;
 
 @SuppressWarnings( "nls" )
-public class MyDruidDataConverter extends BaseFunction
+public class MyNotificationToMapFunction extends BaseFunction
 {
 
     private static final long serialVersionUID = 1L;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger( MyDruidDataConverter.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( MyNotificationToMapFunction.class );
+
+    public static final int INPUT_FIELD_INDEX = 0;
+    public static final int INPUT_FIELD_COUNT = 1;
+
+    public static final int OUTPUT_FIELD_INDEX = 0;
+    public static final int OUTPUT_FIELD_COUNT = 1;
 
     /**
      * {@inheritDoc}
@@ -32,22 +38,31 @@ public class MyDruidDataConverter extends BaseFunction
     @Override
     public void execute( TridentTuple tuple, TridentCollector collector )
     {
-        LOGGER.info( "Converting Message..." );
+        if ( LOGGER.isDebugEnabled() )
+        {
+            LOGGER.debug( "Converting..." );
+        }
 
         try
         {
-            MyNotification notification = (MyNotification)tuple.get( 0 );
-
-            LOGGER.info( "Converted Message..." + String.valueOf( notification ) );
+            MyNotification notification = (MyNotification)tuple.get( INPUT_FIELD_INDEX );
 
             List<Map<String, Object>> valueList = getDruidValues( notification );
+            
+            if ( LOGGER.isDebugEnabled() )
+            {
+                LOGGER.debug( "Converted:  " + String.valueOf( valueList ) );
+            }
 
             for ( Map<String, Object> valueMap : valueList )
             {
                 collector.emit( new Values( valueMap ) );
             }
 
-            LOGGER.info( "Emitted Values." + String.valueOf( notification ) );
+            if ( LOGGER.isInfoEnabled() )
+            {
+                LOGGER.info( "Emitted Value Count:  " + valueList.size() );
+            }
 
         }
         catch ( RuntimeException e )
