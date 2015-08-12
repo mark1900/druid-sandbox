@@ -12,8 +12,8 @@ cd "${DIR}/kafka_2.10-0.8.2.1"
 sleep 5
 
 cd "${DIR}"
-./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-tranquility-topology-test_v1_phase1
-./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-tranquility-topology-test_v1_phase2
+./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-topology-test_v1_phase1
+./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-storm-topology-test_v1_phase2
 
 
 cd "${DIR}/apache-storm-0.9.4"

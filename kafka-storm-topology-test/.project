@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>kafka-storm-tranquility-topology-test</name>
+	<name>kafka-storm-topology-test</name>
 	<comment></comment>
 	<projects>
 	</projects>

@@ -55,11 +55,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
  *
  */
 @SuppressWarnings( "nls" )
-public final class StormTranquilityImprovedTopologyTest
+public final class StormImprovedTopologyTest
 {
-    private static final Logger LOGGER = LoggerFactory.getLogger( StormTranquilityImprovedTopologyTest.class );
+    private static final Logger LOGGER = LoggerFactory.getLogger( StormImprovedTopologyTest.class );
 
-    private StormTranquilityImprovedTopologyTest()
+    private StormImprovedTopologyTest()
     {
         //
     }

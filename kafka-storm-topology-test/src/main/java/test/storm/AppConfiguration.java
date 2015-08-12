@@ -8,8 +8,8 @@ package test.storm;
 public final class AppConfiguration
 {
 
-    public static final String TOPOLOGY_NAME = "kafka-storm-tranquility-topology-test";
-    public static final String KAFKA_SPOUT_ID = "kafka-storm-tranquility-topology-test-kafka-spout";
+    public static final String TOPOLOGY_NAME = "kafka-storm-topology-test";
+    public static final String KAFKA_SPOUT_ID = "kafka-storm-topology-test-kafka-spout";
 
     public static final String ZOOKEEPER_SERVERS_CONFIG = System.getProperty(
         "test.storm.topology.zookeeper.servers.config", "<server-ip-address>:2181" );
