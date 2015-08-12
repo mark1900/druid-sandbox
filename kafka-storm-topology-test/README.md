@@ -153,3 +153,15 @@ Execute Java class file:
 ./kafka_2.10-0.8.2.1/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic kafka-storm-topology-test_v1_phase2
 </code></pre>
 
+
+## Druid Realtime Node Consumer
+
+Druid can consume directly from a Kafka Topic by utilizing the "Kafka Eight" extension .  To achieve this, ensure that the Kafa Topic messages are in the expected JSON format and then configure the associated Druid Realtime Node (-Ddruid.realtime.specFile) appropriately.
+
+Druid Example:
+* http://druid.io/docs/latest/tutorials/tutorial-loading-streaming-data.html
+
+See Also:
+* https://github.com/druid-io/druid/blob/master/examples/bin/examples/indexing/wikipedia.spec
+* http://druid.io/docs/latest/tutorials/tutorial-the-druid-cluster.html
+* https://github.com/druid-io/druid/tree/master/extensions/kafka-eight/
