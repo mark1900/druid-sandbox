@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<configuration>
+    <!-- https://hadoop.apache.org/docs/r2.7.1/hadoop-yarn/hadoop-yarn-common/yarn-default.xml -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo.FifoScheduler</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>10</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop-server</value>
+    </property>
+</configuration>

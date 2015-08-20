@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<configuration>
+    <!-- http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_Reference_Guide/content/reference_chap2.html -->
+    <property>
+        <name>yarn.resourcemanager.scheduler.class</name>
+        <value>org.apache.hadoop.yarn.server.resourcemanager.scheduler.fifo.FifoScheduler</value>
+    </property>
+    <property>
+        <name>yarn.nodemanager.vmem-pmem-ratio</name>
+        <value>10</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.hostname</name>
+        <value>hadoop-server</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.address</name>
+        <value>hadoop-server:8050</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.resource-tracker.address</name>
+        <value>hadoop-server:8025</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.scheduler.address</name>
+        <value>hadoop-server:8030</value>
+    </property>
+    <property>
+        <name>yarn.resourcemanager.admin.address</name>
+        <value>hadoop-server:8141</value>
+    </property>
+</configuration>
