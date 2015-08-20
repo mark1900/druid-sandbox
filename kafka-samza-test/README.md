@@ -62,15 +62,15 @@ curl -L http://search.maven.org/remotecontent?filepath=org/clapper/grizzled-slf4
 curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-yarn_2.10/0.8.0/samza-yarn_2.10-0.8.0.jar > hadoop-2.7.0/share/hadoop/hdfs/lib/samza-yarn_2.10-0.8.0.jar
 curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-core_2.10/0.8.0/samza-core_2.10-0.8.0.jar > hadoop-2.7.0/share/hadoop/hdfs/lib/samza-core_2.10-0.8.0.jar
 
-# Update hadoop-2.7.0/conf/core-site.xml
+ # Update hadoop-2.7.0/conf/core-site.xml
 
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<configuration>
-    <property>
-      <name>fs.http.impl</name>
-      <value>org.apache.samza.util.hadoop.HttpFileSystem</value>
-    </property>
-</configuration>
+&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
+&lt;configuration&gt;
+    &lt;property&gt;
+      &lt;name&gt;fs.http.impl&lt;/name&gt;
+      &lt;value&gt;org.apache.samza.util.hadoop.HttpFileSystem&lt;/value&gt;
+    &lt;/property&gt;
+&lt;/configuration&gt;
 
 
  # Start Hadoop....
