@@ -12,10 +12,10 @@ public final class AppConfiguration
     public static final String KAFKA_SPOUT_ID = "kafka-storm-topology-test-kafka-spout";
 
     public static final String ZOOKEEPER_SERVERS_CONFIG = System.getProperty(
-        "test.storm.topology.zookeeper.servers.config", "<server-ip-address>:2181" );
+        "test.storm.topology.zookeeper.servers.config", "127.0.0.1:2181" );
 
     public static final String KAFKA_SERVERS_CONFIG = System.getProperty(
-        "test.storm.topology.kafka.servers.config", "<server-ip-address>:9092" );
+        "test.storm.topology.kafka.servers.config", "127.0.0.1:9092" );
 
     public static final String KAFKA_SERVERS_CONFIG_PRODUCER_ACKS = System.getProperty(
         "test.storm.topology.kafka.servers.config.producer.acks", "all" );

@@ -14,7 +14,7 @@ The kafka-storm-topology-test project uses the following technologies:
 
 This Storm Topology test assumes that all required services are installed onto the same server.
 
-* Remember to replace the "&lt;sever-ip-address&gt;" placeholder.
+* Remember to update the application's configuration.
 * Remember to check your firewall settings.
 
 # Server Configuration
@@ -51,11 +51,11 @@ cp zookeeper-3.4.6/conf/zoo_sample.cfg zookeeper-3.4.6/conf/zoo.cfg
 vim apache-storm-0.9.4/conf/storm.yaml
 
 storm.zookeeper.servers:
-    - "&lt;sever-ip-address&gt;"
+    - "127.0.0.1"
 
 storm.local.dir: "/tmp/storm/localStorage"
 
-nimbus.host: "&lt;sever-ip-address&gt;"
+nimbus.host: "127.0.0.1"
 
 ui.port: 28080
 </code></pre>
@@ -117,7 +117,7 @@ cd apache-storm-0.9.4
 
 ## Building the Storm Topology
 
-Update the Application configuration values (e.g. &lt;sever-ip-address&gt;) in the source file:
+Update the Application configuration values in the source file:
 
 * kafka-storm-topology-test/src/main/java/test/storm/AppConfiguration.java
 
