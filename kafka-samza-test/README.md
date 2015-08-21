@@ -2,12 +2,17 @@
 
 Below is the documentation for [kafka-samza-test](https://github.com/mark1900/druid-sandbox/tree/master/kafka-samza-test).
 
-The kafka-storm-topology-test project uses the following technologies:
+The kafka-samza-test project uses the following technologies:
 
 * CentOS 7
 * ZooKeeper 3.4.6
 * Kafka 2.10-0.8.2.1
 * Samza 0.9.1
+
+
+The concept is to take a Kafka Topic Message process it and publish to another Kafka Topic.  From here we can utilize the Druid's Kafka Eight Extension to consume data directly from the Kafka Topic.
+* https://github.com/druid-io/druid/tree/master/extensions/kafka-eight
+* http://druid.io/docs/latest/ingestion/realtime-ingestion.html
 
 
 Note:
@@ -118,7 +123,7 @@ kafka-samza-test/bin/run-job.sh --config-factory=org.apache.samza.config.factori
 
  # Input Sample JSON to Kafka Topic
 ./kafka_2.10-0.8.2.1/bin/kafka-console-producer.sh --broker-list localhost:9092 --topic kafka.kafka_samza_test_phase_01
-# {"timestamp": "2015-08-31T03:32:45Z", "key1":"value1", "key2", "value2"}
+# {"timestamp": "2015-08-21T17:08:45-0400", "key1":"value1", "key2", "value2"}
 
  # View Sample JSON Output
 ./kafka_2.10-0.8.2.1/bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic kafka.kafka_samza_test_phase_02
@@ -194,10 +199,10 @@ kafka-samza-test/bin/run-job.sh --config-factory=org.apache.samza.config.factori
 cd /usr/hdp/2.3.2.0-2621/kafka
 
  # Input Sample JSON to Kafka Topic
-bin/kafka-console-producer.sh --broker-list localhost:6667 --topic kafka.kafka_samza_test_phase_01
-# {"timestamp": "2015-08-31T03:32:45Z", "key1":"value1", "key2", "value2"}
+bin/kafka-console-producer.sh --broker-list \`hostname\`:6667 --topic kafka_samza_test_phase_01
+# {"timestamp": "2015-08-21T17:08:45-0400", "key1":"value1", "key2", "value2"}
 
  # View Sample JSON Output
-bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic kafka.kafka_samza_test_phase_02
+bin/kafka-console-consumer.sh --zookeeper \`hostname\`:2181 --from-beginning --topic kafka_samza_test_phase_02
 
 </code></pre>
