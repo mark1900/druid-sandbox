@@ -110,7 +110,13 @@ mkdir -p ~/.samza/conf && cp kafka-samza-test/config/standard/deploy/* ~/.samza/
  # Start Hadoop....
  # http://hadoop-server:8088
 
- #kafka-samza-test/bin/kill-yarn-job.sh application_1440008845052_0008
+cd ~/tmp
+
+ # kafka-samza-test/bin/kill-yarn-job.sh application_1440008845052_0008
+
+ # http://samza.apache.org/learn/tutorials/0.9/deploy-samza-job-from-hdfs.html
+ # ./hadoop-2.7.0/bin/hadoop fs -mkdir -p /kafka-samza-test/
+ # ./hadoop-2.7.0/bin/hadoop fs -put -f ~/tmp/kafka-samza-test-0.0.1-dist.tar.gz /kafka-samza-test/kafka-samza-test-0.0.1-dist.tar.gz
 
 kafka-samza-test/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/kafka-samza-test/config/standard/processing-stream-task.properties
 
@@ -184,8 +190,14 @@ mkdir -p ~/.samza/conf && cp kafka-samza-test/config/standard/deploy/* ~/.samza/
  # http://hadoop-server:8080
  # http://hadoop-server:8088
 
+cd ~/tmp
+
  # kafka-samza-test/bin/kill-yarn-job.sh application_1440008845052_0008
  # /usr/hdp/2.3.2.0-2621/hadoop/bin/yarn application -kill application_1440008845052_0011
+
+ # http://samza.apache.org/learn/tutorials/0.9/deploy-samza-job-from-hdfs.html
+ # /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -mkdir -p /kafka-samza-test/
+ # /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -put -f ~/tmp/kafka-samza-test-0.0.1-dist.tar.gz /kafka-samza-test/kafka-samza-test-0.0.1-dist.tar.gz
 
 kafka-samza-test/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/kafka-samza-test/config/ambari/processing-stream-task.properties
 
