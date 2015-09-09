@@ -1,0 +1,23 @@
+job.name=kafka-gobblin-hdfs-test
+job.group=Kafka
+job.description=Kafka To HDFS
+
+source.class=test.KafkaJsonSource
+converter.classes=test.KafkaJsonConverter
+extract.namespace=test.kafka-gobblin-hdfs-test
+
+
+topic.whitelist=kafka-gobblin-hdfs-test
+bootstrap.with.offset=earliest
+
+kafka.brokers=server1:6667
+
+fs.uri=hdfs://server1:8020/
+
+writer.destination.type=HDFS
+writer.output.format=AVRO
+writer.fs.uri=hdfs://server1:8020/
+writer.staging.dir=/gobblin/task-staging
+writer.output.dir=/gobblin/task-output
+
+data.publisher.type=gobblin.publisher.BaseDataPublisher

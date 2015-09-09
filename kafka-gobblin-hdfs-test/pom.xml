@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>test</groupId>
+    <artifactId>kafka-gobblin-hdfs-test</artifactId>
+    <version>0.0.0</version>
+    <packaging>jar</packaging>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
+
+        <gobblin.home>${env.GOBBLIN_HOME}</gobblin.home>
+
+        <arvo.version>1.7.7</arvo.version>
+        <hadoop.version>2.7.1</hadoop.version>
+        <guava.version>15.0</guava.version>
+        <jackson.version>1.9.13</jackson.version>
+        <dropwizard.metrics.version>3.1.0</dropwizard.metrics.version>
+        <commons.vfs2.version>2.0</commons.vfs2.version>
+        <kafka.version>0.8.2.1</kafka.version>
+        <slf4j.version>1.7.12</slf4j.version>
+        <testng.version>6.9.6</testng.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>gobblin</groupId>
+            <artifactId>gobblin-core</artifactId>
+            <version>0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${gobblin.home}/build/gobblin-core/libs/gobblin-core.jar</systemPath>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>gobblin</groupId> -->
+<!--             <artifactId>gobblin-core</artifactId> -->
+<!--             <version>0.0.0</version> -->
+<!--              <classifier>sources</classifier> -->
+<!--             <scope>system</scope> -->
+<!--             <systemPath>${gobblin.home}/build/gobblin-core/libs/gobblin-core-sources.jar</systemPath> -->
+<!--         </dependency> -->
+        <dependency>
+            <groupId>gobblin</groupId>
+            <artifactId>gobblin-api</artifactId>
+            <version>0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${gobblin.home}/build/gobblin-api/libs/gobblin-api.jar</systemPath>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>gobblin</groupId> -->
+<!--             <artifactId>gobblin-api</artifactId> -->
+<!--             <version>0.0.0</version> -->
+<!--             <classifier>sources</classifier> -->
+<!--             <scope>system</scope> -->
+<!--             <systemPath>${gobblin.home}/build/gobblin-api/libs/gobblin-api-sources.jar</systemPath> -->
+<!--         </dependency> -->
+        <dependency>
+            <groupId>gobblin</groupId>
+            <artifactId>gobblin-metrics</artifactId>
+            <version>0.0.0</version>
+            <scope>system</scope>
+            <systemPath>${gobblin.home}/build/gobblin-metrics/libs/gobblin-metrics.jar</systemPath>
+        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>gobblin</groupId> -->
+<!--             <artifactId>gobblin-metrics</artifactId> -->
+<!--             <version>0.0.0</version> -->
+<!--             <classifier>sources</classifier> -->
+<!--             <scope>system</scope> -->
+<!--             <systemPath>${gobblin.home}/build/gobblin-metrics/libs/gobblin-metrics-sources.jar</systemPath> -->
+<!--         </dependency> -->
+
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro</artifactId>
+            <version>${arvo.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.avro</groupId>
+            <artifactId>avro-mapred</artifactId>
+            <version>${arvo.version}</version>
+            <classifier>hadoop2</classifier>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-common</artifactId>
+            <version>${hadoop.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-mapreduce-client-core</artifactId>
+            <version>${hadoop.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-annotations</artifactId>
+            <version>${hadoop.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>${jackson.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-vfs2</artifactId>
+            <version>${commons.vfs2.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.dropwizard.metrics</groupId>
+            <artifactId>metrics-core</artifactId>
+            <version>${dropwizard.metrics.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.10</artifactId>
+            <version>${kafka.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka-clients</artifactId>
+            <version>${kafka.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
