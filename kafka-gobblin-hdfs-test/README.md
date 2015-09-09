@@ -142,15 +142,19 @@ cd gobblin-dist
 
 Create Kafka Message
 
+
 * Option 1:
 
   Run Java Application test.KafkaMessageProducer
 
+
 * Option 2:
+
+
 <pre><code>
 
 /usr/hdp/2.3.2.0-2621/kafka/bin/kafka-console-producer.sh --broker-list localhost:6667 --topic kafka-gobblin-hdfs-test
-# JSON Sample
+ # JSON Sample
 {"version":"2.0","secret":"****","events": [{"type": "SYSTEM","level": 3,"message": "CPU under heavy load for 5 minutes"},{"type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"},{"type": "APPLICATION","level": 7,"message": "RAM usage above 90 per cent utilization"},{"type": "SECURITY","level": 10,"message": "Hack attack!"}]}
 
 </code></pre>
@@ -158,6 +162,9 @@ Create Kafka Message
 
 View Gobblin Ingestion
 
+<pre><code>
+
  # View working data
  /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -ls /gobblin/work/
 
+</code></pre>
