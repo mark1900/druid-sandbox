@@ -16,16 +16,17 @@ The kafka-gobblin-hdfs-test project uses the following technologies:
 
 Goal
 
-To utilize Gobblin to create a Hadoop MapReduce Job that will
-# Extract Kafka Topic Messages
-# Transform the JSON Message payload into the AVRO format.
-# Push data into HDFS
+To utilize Gobblin to create a Hadoop MapReduce Job that will:
+
+1. Extract Kafka Topic Messages
+2. Transform the JSON Message payload into the AVRO format.
+3. Push data into HDFS
 
 
 Notes:
 
 * Remember to update the application's configuration.
-** Default hostname:  server1 (/etc/hosts.  Cannot point to 127.0.0.1.)
+    * Default hostname:  server1 (/etc/hosts.  Cannot point to 127.0.0.1.)
 
 See also:
 * https://github.com/linkedin/gobblin/wiki/Kafka-HDFS-Ingestion
