@@ -6,12 +6,12 @@ The kafka-gobblin-hdfs-test project uses the following technologies:
 
 * CentOS 7
 * Ambari 2.1.0
-** ZooKeeper 3.4.6
-** Kafka 0.8.2
-** Hadoop (HDFS, MapReduce2, YARN) 2.7.1
-** Pig 0.15.0
-** Tez 0.7.0
-** Hive 1.2.1
+    * ZooKeeper 3.4.6
+    * Kafka 0.8.2
+    * Hadoop (HDFS, MapReduce2, YARN) 2.7.1
+    * Pig 0.15.0
+    * Tez 0.7.0
+    * Hive 1.2.1
 
 
 Goal
@@ -58,12 +58,12 @@ cd kafka-storm-test
 ## Build Test Appliation
 
 * Build Gobblin from source
-** https://github.com/linkedin/gobblin.git
-** Set GOBBLIN_HOME environment variable (See kafka-gobblin-hdfs-test/pom.xml).
+    * https://github.com/linkedin/gobblin.git
+    * Set GOBBLIN_HOME environment variable (See kafka-gobblin-hdfs-test/pom.xml).
 
 * Build this Maven project kafka-gobblin-hdfs-test
-** mvn clean package
-** kafka-gobblin-hdfs-test-0.0.0-dist.tar.gz
+    * mvn clean package
+    * kafka-gobblin-hdfs-test-0.0.0-dist.tar.gz
 
 
 ## Configuration Gobblin
@@ -144,7 +144,7 @@ Create Kafka Message
 
 * Option 1:
 
-Run Java Application test.KafkaMessageProducer
+  Run Java Application test.KafkaMessageProducer
 
 * Option 2:
 <pre><code>
@@ -153,8 +153,11 @@ Run Java Application test.KafkaMessageProducer
 # JSON Sample
 {"version":"2.0","secret":"****","events": [{"type": "SYSTEM","level": 3,"message": "CPU under heavy load for 5 minutes"},{"type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"},{"type": "APPLICATION","level": 7,"message": "RAM usage above 90 per cent utilization"},{"type": "SECURITY","level": 10,"message": "Hack attack!"}]}
 
-View Gobblin
+</code></pre>
+
+
+View Gobblin Ingestion
+
  # View working data
  /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -ls /gobblin/work/
 
-</code></pre>
