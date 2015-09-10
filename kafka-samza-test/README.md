@@ -212,7 +212,7 @@ cd /usr/hdp/2.3.2.0-2621/kafka
 
  # Input Sample JSON to Kafka Topic
 bin/kafka-console-producer.sh --broker-list \`hostname\`:6667 --topic kafka_samza_test_phase_01
-# {"timestamp": "2015-08-21T17:08:45-0400", "key1":"value1", "key2", "value2"}
+# {"timestamp": "2015-08-21T17:08:45-0400", "key1":"value1", "key2":"value2"}
 
  # View Sample JSON Output
 bin/kafka-console-consumer.sh --zookeeper \`hostname\`:2181 --from-beginning --topic kafka_samza_test_phase_02
