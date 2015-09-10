@@ -14,10 +14,16 @@ kafka.brokers=server1:6667
 
 fs.uri=hdfs://server1:8020/
 
-writer.destination.type=HDFS
-writer.output.format=AVRO
 writer.fs.uri=hdfs://server1:8020/
+
+writer.destination.type=HDFS
+
+writer.output.format=AVRO
+writer.output.schema={"namespace":"test.kafka-gobblin-hdfs-test", "type":"record", "name":"event", "fields":[{"name":"timestamp", "type":"string"}, {"name":"type",  "type":"string"}, {"name":"level", "type":"int"}, {"name":"message",  "type":"string"}]}
+
 writer.staging.dir=/gobblin/task-staging
 writer.output.dir=/gobblin/task-output
+
+mr.job.max.mappers=4
 
 data.publisher.type=gobblin.publisher.BaseDataPublisher

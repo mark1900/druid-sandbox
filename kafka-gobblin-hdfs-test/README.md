@@ -99,11 +99,21 @@ vim kafka-gobblin-hdfs-test.pull
  # Fix Windows encoding
 yum install -y dos2unix
 find . -type f -name "*.sh" -exec dos2unix {} \;
-chmod +x bin/gobblin-mapreduce.sh
 
 cd gobblin-dist
-./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://server1:8020/gobblin/work
 
+chmod +x bin/gobblin-mapreduce.sh
+
+vim bin/gobblin-mapreduce.sh
+ # Update Guava Library
+ # Jars Gobblin runtime depends on
+LIBJARS=$USER_JARS$separator$FWDIR_LIB/gobblin-metastore.jar,$FWDIR_LIB/gobblin-metrics.jar,\
+$FWDIR_LIB/gobblin-core.jar,$FWDIR_LIB/gobblin-api.jar,$FWDIR_LIB/gobblin-utility.jar,\
+$FWDIR_LIB/guava-15.0.jar,$FWDIR_LIB/avro-1.7.7.jar,$FWDIR_LIB/metrics-core-3.1.0.jar,\
+$FWDIR_LIB/gson-2.3.1.jar,$FWDIR_LIB/joda-time-2.8.1.jar,$FWDIR_LIB/data-1.15.9.jar
+
+
+./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar,lib/guava-15.0.jar,lib/* --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://server1:8020/gobblin/work
 </code></pre>
 
 
