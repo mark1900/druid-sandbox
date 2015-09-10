@@ -33,36 +33,17 @@ public class KafkaMessageProducer
         producer = new KafkaProducer<>( producerProperties );
 
         final String topic = AppConfiguration.KAFKA_SERVERS_TOPIC;
+
+        // {"timestamp": "2015-08-21T17:08:45-0400", "type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"}
         final String json =
                 ""
                 + "{"
-                + "\"version\":\"2.0\","
-                + "\"secret\":\"****\","
-                + "\"events\": [{"
-                    + "\"type\": \"SYSTEM\","
-                    + "\"level\": 3,"
-                    + "\"message\": \"CPU under heavy load for 5 minutes\""
-                + "},"
-                + "{"
-                        + "\"type\": \"SYSTEM\","
-                        + "\"level\": 5,"
-                        + "\"message\": \"RAM usage above 90 per cent utilization\""
-                + "}"
-                + ","
-                + "{"
-                        + "\"type\": \"APPLICATION\","
-                        + "\"level\": 7,"
-                        + "\"message\": \"RAM usage above 90 per cent utilization\""
-                + "}"
-                + ","
-                + "{"
-                        + "\"type\": \"SECURITY\","
-                        + "\"level\": 10,"
-                        + "\"message\": \"Hack attack!\""
-                + "}"
-                + "]"
-            + "}"
-            + "";
+                + "\"timestamp\": \"2015-08-21T17:08:45-0400\""
+                + ", \"type\": \"SYSTEM\""
+                + ",\"level\": 5,"
+                + "\"message\": \"RAM usage above 90 per cent utilization\""
+                + " }"
+                + "";
 
 
 

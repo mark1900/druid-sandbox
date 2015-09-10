@@ -50,7 +50,7 @@ mkdir ~/tmp
 cd kafka-storm-test
 
 /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop namenode -format
-/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka-gobblin-hdfs-test
+/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-topics.sh --create --zookeeper \`hostname\`:2181 --replication-factor 1 --partitions 1 --topic kafka-gobblin-hdfs-test
 
 </code></pre>
 
@@ -153,9 +153,8 @@ Create Kafka Message
 
 <pre><code>
 
-/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-console-producer.sh --broker-list localhost:6667 --topic kafka-gobblin-hdfs-test
- # JSON Sample
-{"version":"2.0","secret":"****","events": [{"type": "SYSTEM","level": 3,"message": "CPU under heavy load for 5 minutes"},{"type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"},{"type": "APPLICATION","level": 7,"message": "RAM usage above 90 per cent utilization"},{"type": "SECURITY","level": 10,"message": "Hack attack!"}]}
+/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-console-producer.sh --broker-list \`hostname\`:6667 --topic kafka-gobblin-hdfs-test
+{"timestamp": "2015-08-21T17:08:45-0400", "type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"}
 
 </code></pre>
 
