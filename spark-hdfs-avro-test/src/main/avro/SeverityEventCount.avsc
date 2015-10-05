@@ -1,0 +1,16 @@
+{
+  "name" : "SeverityEventCount",
+  "namespace" : "test.avro.dto",
+  "type" : "record",
+  "fields" :
+  [
+    {
+      "name" : "level",
+      "type" : "int"
+    },
+    {
+      "name" : "count",
+      "type" : "int"
+    }
+  ]
+}

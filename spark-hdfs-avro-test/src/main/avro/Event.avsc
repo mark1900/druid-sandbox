@@ -1,0 +1,24 @@
+{
+  "name" : "Event",
+  "namespace" : "test.avro.dto",
+  "type" : "record",
+  "fields" :
+  [
+    {
+      "name" : "timestamp",
+      "type" : "string"
+    },
+    {
+      "name" : "type",
+      "type" : "string"
+    },
+    {
+      "name" : "level",
+      "type" : "int"
+    },
+    {
+      "name" : "message",
+      "type" : "string"
+    }
+  ]
+}
