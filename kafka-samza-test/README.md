@@ -21,9 +21,9 @@ Note:
     * Default hostnames in Maven pom.xml  (Might be possible to edit /etc/hosts as well.  Remember it cannot point to 127.0.0.1.)
 
 <pre><code>
-        <zookeeper.hostname>zookeeper-hostname</zookeeper.hostname>
-        <kafka.hostname>kafka-hostname</kafka.hostname>
-        <hadoop.hostname>hadoop-hostname</hadoop.hostname>
+        &lt;zookeeper.hostname&gt;zookeeper-hostname&lt;/zookeeper.hostname&gt;
+        &lt;kafka.hostname&gt;kafka-hostname&lt;/kafka.hostname&gt;
+        &lt;hadoop.hostname&gt;hadoop-hostname&lt;/hadoop.hostname&gt;
 </code></pre>
 
 
