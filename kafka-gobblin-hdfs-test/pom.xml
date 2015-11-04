@@ -16,6 +16,9 @@
 
         <gobblin.home>${env.GOBBLIN_HOME}</gobblin.home>
 
+        <kafka.hostname>kafka-hostname</kafka.hostname>
+        <hadoop.hostname>hadoop-hostname</hadoop.hostname>
+
         <arvo.version>1.7.7</arvo.version>
         <hadoop.version>2.7.1</hadoop.version>
         <guava.version>15.0</guava.version>
@@ -163,4 +166,19 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <resources>
+          <resource>
+            <directory>src/main/resources</directory>
+            <filtering>true</filtering>
+          </resource>
+        </resources>
+        <testResources>
+          <testResource>
+            <directory>src/test/resources</directory>
+            <filtering>true</filtering>
+          </testResource>
+        </testResources>
+    </build>
 </project>

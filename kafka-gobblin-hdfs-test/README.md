@@ -26,7 +26,13 @@ To utilize Gobblin to create a Hadoop MapReduce Job that will:
 Notes:
 
 * Remember to update the application's configuration.
-    * Default hostname:  server1 (/etc/hosts.  Cannot point to 127.0.0.1.)
+    * Default hostnames in Maven pom.xml  (Might be possible to edit /etc/hosts as well.  Remember it cannot point to 127.0.0.1.)
+
+<pre><code>
+        <kafka.hostname>kafka-hostname</kafka.hostname>
+        <hadoop.hostname>hadoop-hostname</hadoop.hostname>
+</code></pre>
+
 
 See also:
 * https://github.com/linkedin/gobblin/wiki/Kafka-HDFS-Ingestion
@@ -90,10 +96,10 @@ cd ~/tmp/
 tar -zxvf kafka-gobblin-hdfs-test-0.0.0.jar
 tar -zxvf gobblin-dist.tar.gz
 
- # Update the Gobblin config file server1 references (fs.uri=hdfs://server1:8020)
+ # Update the Gobblin config file (fs.uri=hdfs://hadoop-hostname:8020)
 vim gobblin-dist/conf/gobblin-mapreduce.properties
 
- # Update the Job config file server1 references
+ # Check the Job config file
 vim kafka-gobblin-hdfs-test.pull
 
  # Fix Windows encoding
@@ -113,7 +119,7 @@ $FWDIR_LIB/guava-15.0.jar,$FWDIR_LIB/avro-1.7.7.jar,$FWDIR_LIB/metrics-core-3.1.
 $FWDIR_LIB/gson-2.3.1.jar,$FWDIR_LIB/joda-time-2.8.1.jar,$FWDIR_LIB/data-1.15.9.jar
 
 
-./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar,lib/guava-15.0.jar,lib/* --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://server1:8020/gobblin/work
+./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar,lib/guava-15.0.jar,lib/* --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://\`hostname\`:8020/gobblin/work
 </code></pre>
 
 

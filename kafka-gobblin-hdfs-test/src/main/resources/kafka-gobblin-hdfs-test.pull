@@ -4,22 +4,22 @@ job.description=Kafka To HDFS
 
 source.class=test.KafkaJsonSource
 converter.classes=test.KafkaJsonConverter
-extract.namespace=test.kafka-gobblin-hdfs-test
+extract.namespace=kafka-gobblin-hdfs-test
 
 
 topic.whitelist=kafka-gobblin-hdfs-test
 bootstrap.with.offset=earliest
 
-kafka.brokers=server1:6667
+kafka.brokers=${kafka.hostname}:6667
 
-fs.uri=hdfs://server1:8020/
+fs.uri=hdfs://${hadoop.hostname}:8020/
 
-writer.fs.uri=hdfs://server1:8020/
+writer.fs.uri=hdfs://${hadoop.hostname}:8020/
 
 writer.destination.type=HDFS
 
 writer.output.format=AVRO
-writer.output.schema={"namespace":"test.kafka-gobblin-hdfs-test", "type":"record", "name":"event", "fields":[{"name":"timestamp", "type":"string"}, {"name":"type",  "type":"string"}, {"name":"level", "type":"int"}, {"name":"message",  "type":"string"}]}
+writer.output.schema={"namespace":"kafka-gobblin-hdfs-test", "type":"record", "name":"event", "fields":[{"name":"timestamp", "type":"string"}, {"name":"type",  "type":"string"}, {"name":"level", "type":"int"}, {"name":"message",  "type":"string"}]}
 
 writer.staging.dir=/gobblin/task-staging
 writer.output.dir=/gobblin/task-output

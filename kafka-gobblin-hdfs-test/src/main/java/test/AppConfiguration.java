@@ -11,10 +11,10 @@ public class AppConfiguration
 {
 
     public static final String KAFKA_SERVERS_CONFIG = System.getProperty(
-        "test.kafka-gobblin-hdfs-test.kafka.servers.config", "server1:6667" );
+        "kafka-gobblin-hdfs-test.kafka.servers.config", "kafka-hostname:6667" );
 
     public static final String KAFKA_SERVERS_TOPIC = System.getProperty(
-        "test.kafka-gobblin-hdfs-test.kafka.servers.config.topic.test", "kafka-gobblin-hdfs-test" );
+        "kafka-gobblin-hdfs-test.kafka.servers.config.topic.test", "kafka-gobblin-hdfs-test" );
 
 
     private static Properties properties = new Properties();
