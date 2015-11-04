@@ -4,6 +4,6 @@
     <!-- http://hadoop.apache.org/docs/r2.7.1/hadoop-project-dist/hadoop-common/core-default.xml -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hadoop-server:9000</value>
+        <value>hdfs://${hadoop.hostname}:9000</value>
     </property>
 </configuration>

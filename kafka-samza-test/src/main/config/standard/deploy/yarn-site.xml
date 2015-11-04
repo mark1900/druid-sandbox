@@ -11,6 +11,6 @@
     </property>
     <property>
         <name>yarn.resourcemanager.hostname</name>
-        <value>hadoop-server</value>
+        <value>${hadoop.hostname}</value>
     </property>
 </configuration>

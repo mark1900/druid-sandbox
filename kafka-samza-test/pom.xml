@@ -11,6 +11,10 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <samza.version>0.9.1</samza.version>
+
+        <zookeeper.hostname>zookeeper-hostname</zookeeper.hostname>
+        <kafka.hostname>kafka-hostname</kafka.hostname>
+        <hadoop.hostname>hadoop-hostname</hadoop.hostname>
     </properties>
 
     <dependencies>

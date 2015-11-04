@@ -4,6 +4,6 @@
     <!-- http://docs.hortonworks.com/HDPDocuments/HDP2/HDP-2.3.0/bk_HDP_Reference_Guide/content/reference_chap2.html -->
     <property>
         <name>fs.defaultFS</name>
-        <value>hdfs://hadoop-server:8020</value>
+        <value>hdfs://${hadoop.hostname}:8020</value>
     </property>
 </configuration>
