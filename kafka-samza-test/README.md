@@ -18,7 +18,7 @@ The concept is to take a Kafka Topic Message process it and publish to another K
 Note:
 
 * Remember to update the application's configuration.
-** Default hostnames in Maven pom.xml  (Might be possible to edit /etc/hosts as well.  Remember it cannot point to 127.0.0.1.)
+    * Default hostnames in Maven pom.xml  (Might be possible to edit /etc/hosts as well.  Remember it cannot point to 127.0.0.1.)
 
 <pre><code>
         <zookeeper.hostname>zookeeper-hostname</zookeeper.hostname>
