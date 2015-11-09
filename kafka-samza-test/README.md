@@ -46,7 +46,7 @@ tar -xzf zookeeper-3.4.6.tar.gz
 tar -xzf kafka_2.10-0.8.2.1.tgz
 tar -xzf hadoop-2.7.1.tar.gz
 
-./hadoop-2.7.0/bin/hadoop namenode -format
+./hadoop-2.7.1/bin/hadoop namenode -format
 ./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka_samza_test_phase_01
 ./kafka_2.10-0.8.2.1/bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic kafka_samza_test_phase_02
 
@@ -66,37 +66,11 @@ tar -xzf hadoop-2.7.1.tar.gz
 
 ## Configuration
 
-* Configure Hadoop with Samza libraries
+* Assume that yarn.package.path is "hdfs:", never "file:".
+    * https://samza.apache.org/learn/tutorials/0.9/run-in-multi-node-yarn.html (Skip steps 4,5,6.)
+    * https://samza.apache.org/learn/tutorials/0.9/deploy-samza-job-from-hdfs.html
 
-<pre><code>
-
- # https://samza.apache.org/learn/tutorials/0.9/run-in-multi-node-yarn.html
-wget http://www.scala-lang.org/files/archive/scala-2.10.4.tgz
-tar -xvf scala-2.10.4.tgz
-rm kafka-samza-test/lib/scala-compiler-2.10.4.jar kafka-samza-test/lib/scala-library-2.10.4.jar
-cp scala-2.10.4/lib/scala-compiler.jar scala-2.10.4/lib/scala-library.jar kafka-samza-test/lib/
-cp scala-2.10.4/lib/scala-compiler.jar scala-2.10.4/lib/scala-library.jar hadoop-2.7.0/share/hadoop/hdfs/lib/
-curl -L http://search.maven.org/remotecontent?filepath=org/clapper/grizzled-slf4j_2.10/1.0.1/grizzled-slf4j_2.10-1.0.1.jar > hadoop-2.7.0/share/hadoop/hdfs/lib/grizzled-slf4j_2.10-1.0.1.jar
-curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-yarn_2.10/0.8.0/samza-yarn_2.10-0.8.0.jar > hadoop-2.7.0/share/hadoop/hdfs/lib/samza-yarn_2.10-0.8.0.jar
-curl -L http://search.maven.org/remotecontent?filepath=org/apache/samza/samza-core_2.10/0.8.0/samza-core_2.10-0.8.0.jar > hadoop-2.7.0/share/hadoop/hdfs/lib/samza-core_2.10-0.8.0.jar
-
-</code></pre>
-
- * Update hadoop-2.7.0/conf/core-site.xml
-
-<pre><code>
-
-&lt;?xml-stylesheet type=&quot;text/xsl&quot; href=&quot;configuration.xsl&quot;?&gt;
-&lt;configuration&gt;
-    &lt;property&gt;
-      &lt;name&gt;fs.http.impl&lt;/name&gt;
-      &lt;value&gt;org.apache.samza.util.hadoop.HttpFileSystem&lt;/value&gt;
-    &lt;/property&gt;
-&lt;/configuration&gt;
-
-</code></pre>
-
-* Configure Samza Site XML
+* Configure Samza
 
 <pre><code>
 
@@ -122,8 +96,8 @@ cd ~/tmp
  # kafka-samza-test/bin/kill-yarn-job.sh application_1440008845052_0008
 
  # http://samza.apache.org/learn/tutorials/0.9/deploy-samza-job-from-hdfs.html
- # ./hadoop-2.7.0/bin/hadoop fs -mkdir -p /kafka-samza-test/
- # ./hadoop-2.7.0/bin/hadoop fs -put -f ~/tmp/kafka-samza-test-0.0.1-dist.tar.gz /kafka-samza-test/kafka-samza-test-0.0.1-dist.tar.gz
+ # ./hadoop-2.7.1/bin/hadoop fs -mkdir -p /kafka-samza-test/
+ # ./hadoop-2.7.1/bin/hadoop fs -put -f ~/tmp/kafka-samza-test-0.0.1-dist.tar.gz /kafka-samza-test/kafka-samza-test-0.0.1-dist.tar.gz
 
 kafka-samza-test/bin/run-job.sh --config-factory=org.apache.samza.config.factories.PropertiesConfigFactory --config-path=file://$PWD/kafka-samza-test/config/standard/processing-stream-task.properties
 
@@ -175,7 +149,11 @@ cd kafka-storm-test
 
 ## Configuration
 
-* Configure Samza Site XML
+* Assume that yarn.package.path is "hdfs:", never "file:".
+    * https://samza.apache.org/learn/tutorials/0.9/run-in-multi-node-yarn.html (Skip steps 4,5,6.)
+    * https://samza.apache.org/learn/tutorials/0.9/deploy-samza-job-from-hdfs.html
+
+* Configure Samza
 
 <pre><code>
 
