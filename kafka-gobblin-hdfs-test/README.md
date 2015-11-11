@@ -55,8 +55,8 @@ mkdir ~/tmp
 
 cd kafka-storm-test
 
-/usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop namenode -format
-/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-topics.sh --create --zookeeper \`hostname\`:2181 --replication-factor 1 --partitions 1 --topic kafka-gobblin-hdfs-test
+/usr/hdp/current/hadoop-client/bin/hadoop namenode -format
+/usr/hdp/current/kafka-broker/bin/kafka-topics.sh --create --zookeeper \`hostname\`:2181 --replication-factor 1 --partitions 1 --topic kafka-gobblin-hdfs-test
 
 </code></pre>
 
@@ -80,7 +80,7 @@ cd kafka-storm-test
  vim ~/.bashrc
 
  # Add the following entries
-export HADOOP_BIN_DIR=/usr/hdp/2.3.2.0-2621/hadoop/bin
+export HADOOP_BIN_DIR=/usr/hdp/current/hadoop-client/bin
 
 </code></pre>
 
@@ -93,33 +93,26 @@ mkdir ~/tmp && cd ~/tmp
 
 cd ~/tmp/
 
-tar -zxvf kafka-gobblin-hdfs-test-0.0.0.jar
+ # Extract kafka-gobblin-hdfs-test-0.0.0.jar to directory kafka-gobblin-hdfs-test-0.0.0
+unzip kafka-gobblin-hdfs-test-0.0.0.jar -d kafka-gobblin-hdfs-test-0.0.0
+
+ # Extract gobblin-dist.tar.gz to directory gobblin-dist
 tar -zxvf gobblin-dist.tar.gz
 
  # Update the Gobblin config file (fs.uri=hdfs://hadoop-hostname:8020)
-vim gobblin-dist/conf/gobblin-mapreduce.properties
+ # vim gobblin-dist/conf/gobblin-mapreduce.properties
+sed -i -- 's/localhost:8020/hadoop-hostname:8020/g' gobblin-dist/conf/gobblin-mapreduce.properties
 
  # Check the Job config file
-vim kafka-gobblin-hdfs-test.pull
+vim kafka-gobblin-hdfs-test-0.0.0/kafka-gobblin-hdfs-test.pull
 
  # Fix Windows encoding
 yum install -y dos2unix
 find . -type f -name "*.sh" -exec dos2unix {} \;
 
 cd gobblin-dist
-
 chmod +x bin/gobblin-mapreduce.sh
 
-vim bin/gobblin-mapreduce.sh
- # Update Guava Library
- # Jars Gobblin runtime depends on
-LIBJARS=$USER_JARS$separator$FWDIR_LIB/gobblin-metastore.jar,$FWDIR_LIB/gobblin-metrics.jar,\
-$FWDIR_LIB/gobblin-core.jar,$FWDIR_LIB/gobblin-api.jar,$FWDIR_LIB/gobblin-utility.jar,\
-$FWDIR_LIB/guava-15.0.jar,$FWDIR_LIB/avro-1.7.7.jar,$FWDIR_LIB/metrics-core-3.1.0.jar,\
-$FWDIR_LIB/gson-2.3.1.jar,$FWDIR_LIB/joda-time-2.8.1.jar,$FWDIR_LIB/data-1.15.9.jar
-
-
-./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar,lib/guava-15.0.jar,lib/* --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://\`hostname\`:8020/gobblin/work
 </code></pre>
 
 
@@ -135,19 +128,21 @@ $FWDIR_LIB/gson-2.3.1.jar,$FWDIR_LIB/joda-time-2.8.1.jar,$FWDIR_LIB/data-1.15.9.
 
 cd ~/tmp
 
-sudo usermod -a -G hdfs,hadoop $USER
+ # Configure HDFS Output Directories
+ sudo usermod -a -G hdfs,hadoop $USER
+ /usr/hdp/current/hadoop-client/bin/hadoop fs -mkdir -p /gobblin/work
 
 cd gobblin-dist
-./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar --conf ../kafka-gobblin-hdfs-test.pull --workdir hdfs://server1:8020/gobblin/work
+./bin/gobblin-mapreduce.sh --jars ../kafka-gobblin-hdfs-test-0.0.0.jar,lib/guava-15.0.jar,lib/* --conf ../kafka-gobblin-hdfs-test-0.0.0/kafka-gobblin-hdfs-test.pull --workdir hdfs://\`hostname\`:8020/gobblin/work
 
 
  # Kill running application
- # /usr/hdp/2.3.2.0-2621/hadoop/bin/yarn application -kill application_1440008845052_0011
+ # /usr/hdp/current/hadoop-yarn-client/bin/yarn application -kill application_1440008845052_0011
 
  # View working data
- # /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -ls /gobblin/work/
+ # /usr/hdp/current/hadoop-client/bin/hadoop fs -ls /gobblin/work/
  # Erase all Gobblin locks (Set in kafka-gobblin-hdfs-test.pull)
- # /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -rm -r -skipTrash /gobblin/work/locks
+ # /usr/hdp/current/hadoop-client/bin/hadoop fs -rm -r -skipTrash /gobblin/work/locks
 
 
 </code></pre>
@@ -169,7 +164,7 @@ Create Kafka Message
 
 <pre><code>
 
-/usr/hdp/2.3.2.0-2621/kafka/bin/kafka-console-producer.sh --broker-list \`hostname\`:6667 --topic kafka-gobblin-hdfs-test
+/usr/hdp/current/kafka-broker/bin/kafka-console-producer.sh --broker-list \`hostname\`:6667 --topic kafka-gobblin-hdfs-test
 {"timestamp": "2015-08-21T17:08:45-0400", "type": "SYSTEM","level": 5,"message": "RAM usage above 90 per cent utilization"}
 
 </code></pre>
@@ -180,6 +175,6 @@ View Gobblin Ingestion
 <pre><code>
 
  # View working data
- /usr/hdp/2.3.2.0-2621/hadoop/bin/hadoop fs -ls /gobblin/work/
+ /usr/hdp/current/hadoop-client/bin/hadoop fs -ls /gobblin/work/
 
 </code></pre>
