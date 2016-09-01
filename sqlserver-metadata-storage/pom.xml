@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.druid.extensions</groupId>
+    <artifactId>sqlserver-metadata-storage</artifactId>
+    <name>sqlserver-metadata-storage</name>
+    <description>sqlserver-metadata-storage</description>
+
+    <parent>
+        <groupId>io.druid</groupId>
+        <artifactId>druid</artifactId>
+        <version>0.8.3</version>
+<!--         <relativePath>../../pom.xml</relativePath> -->
+    </parent>
+
+    <dependencies>
+    
+        <!-- The Microsoft SqlServer JDBC Driver will have to be added to Maven manually -->
+        <!-- https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774 -->
+        <!-- mvn install:install-file -Dfile=sqljdbc4.jar -DgroupId=com.microsoft -DartifactId=sqljdbc4 -Dversion=4.0.2206.100 -Dpackaging=jar -->
+        <dependency>
+            <groupId>com.microsoft</groupId>
+            <artifactId>sqljdbc4</artifactId>
+            <version>4.0.2206.100</version>
+        </dependency>
+    
+        <dependency>
+            <groupId>io.druid</groupId>
+            <artifactId>druid-api</artifactId>
+            <version>0.3.13</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.druid</groupId>
+            <artifactId>druid-common</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.druid</groupId>
+            <artifactId>druid-server</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.jdbi</groupId>
+            <artifactId>jdbi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.1</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>
