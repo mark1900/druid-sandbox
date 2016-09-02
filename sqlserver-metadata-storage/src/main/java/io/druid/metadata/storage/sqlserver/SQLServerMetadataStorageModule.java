@@ -12,6 +12,7 @@ import io.druid.metadata.SQLMetadataConnector;
 
 import java.util.List;
 
+@SuppressWarnings( "nls" )
 public class SQLServerMetadataStorageModule extends SQLMetadataStorageDruidModule implements DruidModule
 {
 

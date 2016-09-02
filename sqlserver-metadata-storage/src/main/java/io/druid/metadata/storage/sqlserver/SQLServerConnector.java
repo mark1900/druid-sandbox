@@ -29,15 +29,67 @@ public class SQLServerConnector extends SQLMetadataConnector
 {
   private static final Logger log = new Logger(SQLServerConnector.class);
 
+  /**
+   * <p><blockquote><pre>
+   *
+   * Sql Server equivalent to the SERIAL_TYPE value in other SQLMetadataConnectors.
+   *
+   * SqlServer - PAYLOAD_TYPE = "VARBINARY(MAX)"
+   *     Variable-length binary data
+   *
+   * PostgreSQL - PAYLOAD_TYPE = "BYTEA"
+   *     variable-length binary string
+   *
+   * MySQL - PAYLOAD_TYPE = "LONGBLOB"
+   *     a binary large object that can hold a variable amount of data
+   *
+   * </pre></blockquote><p>
+   *
+   * @see <a href="https://msdn.microsoft.com/en-CA/library/ms187745.aspx">MS SQL Server Numeric Types</a>
+   * @see io.druid.metadata.storage.postgresql.PostgreSQLConnector
+   * @see io.druid.metadata.storage.mysql.MySQLConnector
+   *
+   */
   private static final String PAYLOAD_TYPE = "VARBINARY(MAX)";
 
+
+  /**
+   *
+   * <p><blockquote><pre>
+   * Sql Server equivalent to the SERIAL_TYPE value in other SQLMetadataConnectors.
+   *
+   * SqlServer - SERIAL_TYPE = "[bigint] IDENTITY (1, 1)"
+   *     The bigint range is from -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+   *
+   * PostgreSQL - SERIAL_TYPE ="BIGSERIAL"
+   *     The BIGSERIAL range is from 1 to 9223372036854775807
+   *
+   * MySQL - SERIAL_TYPE = "BIGINT(20) AUTO_INCREMENT"
+   *     The BIGINT range is from -9223372036854775808 to 9223372036854775807
+   *     Also note that "SERIAL" is an alias for "BIGINT UNSIGNED NOT NULL AUTO_INCREMENT UNIQUE"
+   *
+   * </pre></blockquote><p>
+   *
+   * @see <a href="https://msdn.microsoft.com/en-CA/library/ms187745.aspx">MS SQL Server Numeric Types</a>
+   * @see io.druid.metadata.storage.postgresql.PostgreSQLConnector
+   * @see io.druid.metadata.storage.mysql.MySQLConnector
+   *
+   *
+   *
+   */
   private static final String SERIAL_TYPE = "[bigint] IDENTITY (1, 1)";
 
   public static final int DEFAULT_STREAMING_RESULT_SIZE = 100;
 
   private final DBI dbi;
 
-
+  /**
+   * <p><blockquote><pre>
+   * Classify Transient Sql State Codes
+   * </pre></blockquote><p>
+   * @see <a href="https://github.com/spring-projects/spring-framework/blob/master/spring-jdbc/src/main/java/org/springframework/jdbc/support/SQLStateSQLExceptionTranslator.java">Spring Framework SQLStateSQLExceptionTranslator</a>
+   * @see java.sql.SQLException#getSQLState()
+   */
   private final Set<String> TRANSIENT_SQL_CLASS_CODES = new HashSet<>(Arrays.asList(
     "08", "53", "54", "57", "58",   // Resource Failures
     "JW", "JZ", "S1",               // Transient Failures
@@ -62,6 +114,10 @@ public class SQLServerConnector extends SQLMetadataConnector
 
   public static class CustomStatementRewriter implements StatementRewriter
   {
+
+    private ColonPrefixNamedParamStatementRewriter colonPrefixNamedParamStatementRewriter =
+      new ColonPrefixNamedParamStatementRewriter();
+
       @Override
     public RewrittenStatement rewrite(String sql, Binding params, StatementContext ctx)
     {
@@ -75,7 +131,7 @@ public class SQLServerConnector extends SQLMetadataConnector
         .replaceAll( "(?i)TRUE", "1" )
         .replaceAll( "(?i)FALSE", "0" )
         ;
-      return ( new ColonPrefixNamedParamStatementRewriter() ).rewrite( sqlUpdated, params, ctx );
+      return ( colonPrefixNamedParamStatementRewriter ).rewrite( sqlUpdated, params, ctx );
     }
   }
 
@@ -108,9 +164,10 @@ public class SQLServerConnector extends SQLMetadataConnector
 
   /**
    *
-   * @see "http://stackoverflow.com/questions/1197733/does-sql-server-offer-anything-like-mysqls-on-duplicate-key-update"
+   *{@inheritDoc}
    *
-   * {@inheritDoc}
+   * @see <a href="http://stackoverflow.com/questions/1197733/does-sql-server-offer-anything-like-mysqls-on-duplicate-key-update">http://stackoverflow.com/questions/1197733/does-sql-server-offer-anything-like-mysqls-on-duplicate-key-update</a>
+   *
    */
   @Override
   public Void insertOrUpdate(
@@ -157,10 +214,10 @@ public class SQLServerConnector extends SQLMetadataConnector
 
   /**
    *
-   * @see java.sql.SQLException#getSQLState()
-   * @see "https://github.com/spring-projects/spring-framework/blob/master/spring-jdbc/src/main/java/org/springframework/jdbc/support/SQLStateSQLExceptionTranslator.java"
-   *
    * {@inheritDoc}
+   *
+   * @see java.sql.SQLException#getSQLState()
+   *
    */
   @Override
   protected boolean connectorIsTransientException(Throwable e)
