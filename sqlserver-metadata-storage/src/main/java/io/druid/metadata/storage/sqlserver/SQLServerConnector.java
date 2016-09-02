@@ -30,7 +30,8 @@ public class SQLServerConnector extends SQLMetadataConnector
   private static final Logger log = new Logger(SQLServerConnector.class);
 
   private static final String PAYLOAD_TYPE = "VARBINARY(MAX)";
-  private static final String SERIAL_TYPE = "[int] IDENTITY (1, 1)";
+
+  private static final String SERIAL_TYPE = "[bigint] IDENTITY (1, 1)";
 
   public static final int DEFAULT_STREAMING_RESULT_SIZE = 100;
 
