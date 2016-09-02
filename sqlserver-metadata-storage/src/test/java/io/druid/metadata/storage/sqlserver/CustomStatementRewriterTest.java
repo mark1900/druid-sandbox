@@ -1,14 +1,12 @@
-package org.skife.jdbi.v2;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+package io.druid.metadata.storage.sqlserver;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.skife.jdbi.v2.Binding;
+import org.skife.jdbi.v2.StatementContext;
 import org.skife.jdbi.v2.exceptions.UnableToCreateStatementException;
 import org.skife.jdbi.v2.tweak.RewrittenStatement;
 
-import io.druid.metadata.SQLMetadataStorageActionHandler;
 import io.druid.metadata.storage.sqlserver.SQLServerConnector.CustomStatementRewriter;
 import junit.framework.Assert;
 
@@ -25,10 +23,8 @@ public class CustomStatementRewriterTest
     {
         customStatementRewriter = new CustomStatementRewriter();
 
-        params = new Binding();
-
-        Map<String, Object> globalAttributes = new LinkedHashMap<>();
-        ctx = new ConcreteStatementContext(globalAttributes);
+        params = null;
+        ctx = null;
     }
 
 
@@ -41,7 +37,7 @@ public class CustomStatementRewriterTest
     /**
     *
     * @see org.skife.jdbi.v2.TestColonStatementRewriter
-    * @see "https://github.com/jdbi/jdbi/blob/master/src/test/java/org/skife/jdbi/v2/TestColonStatementRewriter.java"
+    * @see <a href="https://github.com/jdbi/jdbi/blob/master/src/test/java/org/skife/jdbi/v2/TestColonStatementRewriter.java">https://github.com/jdbi/jdbi/blob/master/src/test/java/org/skife/jdbi/v2/TestColonStatementRewriter.java</a>
     *
     */
    @Test
